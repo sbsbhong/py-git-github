@@ -1,3 +1,11 @@
+"""class Router:
+    def __init__(self, func):
+        self._func = func
+    
+    def __call__(self, *args):
+        pass"""
+
+
 class ApiRouter:
     def __init__(self, id_or_token: str, password:str):
         self._base_headers = {
@@ -14,30 +22,35 @@ class ApiRouter:
             return headers
 
         return self._base_headers
-
-    def set_get_method(self):
+#=================================================================
+    def set_get(self):
         self.type = 'GET'
         self.headers = self.return_headers()
 
-    def set_patch_method(self, update_data):
-        self.type = 'GET'
+    def set_patch(self):
+        self.type = 'PATCH'
         self.headers = self.return_headers({'Content-Type': 'application/json'})
-
-## Organization
+#=================================================================
     def api_get_org(self, org: str):
-        self.set_get_method()
+        self.set_get()
         self.path = "/orgs/{ORG}".format(ORG=org)
 
-## Repository
     def api_get_repos(self, org: str):
-        self.set_get_method()
-        self.path = "/repos/{ORG}/repos".format(ORG=org)
+        self.set_get()
+        self.path = "/orgs/{ORG}/repos".format(ORG=org)
 
     def api_get_repo(self, org: str, repo: str):
-        self.set_get_method()
+        self.set_get()
         self.path = "/repos/{ORG}/{REPO}".format(ORG=org, REPO=repo)
 
-    def api_patch_repo(self, org: str, repo: str):
-        self.set_patch_method()
+    def api_patch_repo(self, org: str, repo: str, update_data:dict):
+        self.set_patch()
         self.path = "/repos/{ORG}/{REPO}".format(ORG=org, REPO=repo)
+    
+    def api_get_branches(self, org: str, repo: str):
+        self.set_get()
+        self.path = "/repos/{ORG}/{REPO}/branches".format(ORG=org, REPO=repo)
 
+    def api_get_branch(self, org: str, repo: str, branch:str):
+        self.set_get()
+        self.path = "/repos/{ORG}/{REPO}/branches/{BRANCH}".format(ORG=org, REPO=repo, BRANCH=branch)

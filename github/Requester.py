@@ -41,7 +41,7 @@ class Requester:
         res = self._separate_request_type(
             headers, request_type, full_url, update_data)
         succeed_in_receiving_response = self._check_status(res, success_code)
-
+        
         if succeed_in_receiving_response:
             return res.json()
         else:

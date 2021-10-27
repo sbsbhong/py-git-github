@@ -13,5 +13,13 @@ USER_PASSWORD = os.environ.get('USER_PASSWORD')
 # Login
 gh = Github(id_or_token=USER_ID, password=USER_PASSWORD)
 
-org = gh.get_org('TEAM-STARDUSTS')
-repo = gh.get_repo('TEAM-STARDUSTS/early-adopter')
+if __name__ == '__main__':
+
+    #org = gh.get_org('TEAM-STARDUSTS')
+    #repos = gh.get_repos('TEAM-STARDUSTS')
+    repo = gh.get_repo('TEAM-STARDUSTS/early-adopter')
+    #branches = gh.get_branches('TEAM-STARDUSTS/early-adopter')
+    #branches = repo.get_braches()
+    branch = repo.get_branch('master')
+
+    print(branch.data.name)
