@@ -46,11 +46,11 @@ def change_delimiter_to_hypen(name:str):
 
         elif item is space or underbar or comma: 
             changed_delimiter_name.append(hyphen)
-            name[index + 1] = name[index + 1].lower()
+            name[index + 1] = name[index + 1].lower() # Hyphen 뒤의 알파벳 --> 소문자
 
     return changed_delimiter_name
 
-def change_to_git_naming_convention(name:str):
+def change_name_suit_git(name:str):
     changed_delimiter_name:list = change_delimiter_to_hypen(name)
     converted_name:list = camel_to_snake(changed_delimiter_name)
 
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
     for repo in repos:
         print(repo.full_name)
-        new_repo_name:str = change_to_git_naming_convention(repo.name)
+        new_repo_name:str = change_name_suit_git(repo.name) # PyGitGithub_ChangeRepoName --> py-git-github-change-repo-name
 
         gh.patch_repo(repo.full_name, {
             'name' : new_repo_name
