@@ -86,11 +86,11 @@ class Github:
         [org, repo] = repo_fullname.split('/')
 
         router = self._router
-        router.api_patch_repo(org, repo)
+        router.api_patch_repo(org, repo, update_data)
 
         res = self._requester.request_to_hub(
             router.headers, router.type, router.path, update_data)
 
-        return Repository(self._requester, self._router, res)
+        return Repository(self._requester, self._router, res, self._per_page)
     
     
